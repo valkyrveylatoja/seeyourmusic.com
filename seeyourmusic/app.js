@@ -20,21 +20,6 @@ mongoose.connect('mongodb://localhost:27017/seeyourmusic', { useNewUrlParser: tr
 const users = require('./routes/users');
 app.use('/users', users);
 
-// Login route
-app.post('/login', async (req, res) => {
-    const { email, password } = req.body;
-    try {
-        const user = await User.findOne({ email, password });
-        if (user) {
-            res.json({ message: 'Login successful' });
-        } else {
-            res.status(401).json({ error: 'Invalid email or password' });
-        }
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });
